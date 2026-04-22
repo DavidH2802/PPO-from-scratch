@@ -3,7 +3,7 @@ from dataclasses import dataclass
 @dataclass
 class PPOConfig:
     # env
-    task: str = "Isaac-Cartpole-Direct-v0"
+    task: str = "Isaac-Reach-Franka-v0"
     num_envs: int = 4096
 
     # ppo
