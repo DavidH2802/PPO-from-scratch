@@ -1,14 +1,19 @@
-import isaacgym
+from isaaclab.app import AppLauncher
+
+app_launcher = AppLauncher(headless=True)
+simulation_app = app_launcher.app
+
+import isaaclab_tasks
 import torch
 from config import PPOConfig
-from env import IsaacEnv
+from env import IsaacLabEnv
 from agent import PPOAgent
 
 
 def train():
     cfg = PPOConfig()
 
-    env = IsaacEnv(cfg)
+    env = IsaacLabEnv(cfg)
     agent = PPOAgent(env.obs_dim, env.act_dim, cfg)
 
     obs = env.reset()
@@ -41,6 +46,8 @@ def train():
         "critic": agent.critic.state_dict(),
     }, "final_policy.pt")
 
+    env.close()
+    simulation_app.close()
     print("done")
 
 
