@@ -24,19 +24,17 @@ def train():
     obs = env.reset()
 
     for iteration in range(cfg.max_iterations):
-        obs = agent.collect_rollout(env, obs)
+        if iteration > 0:
+            obs_rms.update(agent.obs_buf.reshape(-1, env.obs_dim))
 
-        obs_rms.update(agent.obs_buf.reshape(-1, env.obs_dim))
-        agent.obs_buf = obs_rms.normalize(agent.obs_buf)
+        # normalize current obs before starting rollout
+        obs_norm = obs_rms.normalize(obs)
+        obs = agent.collect_rollout(env, obs, obs_rms)
 
         raw_mean_reward = agent.rew_buf.sum(dim=0).mean().item()
 
-        rew_rms.update(agent.rew_buf.reshape(-1))
-        agent.rew_buf = rew_rms.normalize(agent.rew_buf)
 
-        obs = obs_rms.normalize(obs)
-
-        advantages, returns = agent.compute_gae(obs)
+        advantages, returns = agent.compute_gae(obs_rms.normalize(obs))
         losses = agent.update(advantages, returns)
 
         logger.log({

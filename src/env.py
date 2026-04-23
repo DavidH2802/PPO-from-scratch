@@ -1,16 +1,17 @@
-from isaaclab_tasks.direct.cartpole.cartpole_env import CartpoleEnv, CartpoleEnvCfg
+import gymnasium as gym
+from isaaclab_tasks.utils import load_cfg_from_registry
 
 
 class IsaacLabEnv:
     def __init__(self, cfg):
-        env_cfg = CartpoleEnvCfg()
+        env_cfg = load_cfg_from_registry(cfg.task, "env_cfg_entry_point")
         env_cfg.scene.num_envs = cfg.num_envs
 
-        self.env = CartpoleEnv(cfg=env_cfg)
+        self.env = gym.make(cfg.task, cfg=env_cfg)
 
         self.num_envs = cfg.num_envs
-        self.obs_dim = env_cfg.observation_space
-        self.act_dim = env_cfg.action_space
+        self.obs_dim = self.env.observation_space["policy"].shape[0]
+        self.act_dim = self.env.action_space.shape[0]
         self.device = cfg.device
 
     def reset(self):

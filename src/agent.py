@@ -24,14 +24,17 @@ class PPOAgent:
         self.val_buf = torch.zeros(cfg.horizon, cfg.num_envs, device=self.device)
 
     @torch.no_grad()
-    def collect_rollout(self, env, obs):
+    def collect_rollout(self, env, obs, obs_rms=None):
         for t in range(self.cfg.horizon):
-            action, log_prob, _ = self.actor.get_action(obs)
-            value = self.critic(obs)
+            # normalize obs before feeding to policy
+            obs_input = obs_rms.normalize(obs) if obs_rms else obs
+
+            action, log_prob, _ = self.actor.get_action(obs_input)
+            value = self.critic(obs_input)
 
             next_obs, reward, done, info = env.step(action)
 
-            self.obs_buf[t] = obs
+            self.obs_buf[t] = obs_input
             self.act_buf[t] = action
             self.logp_buf[t] = log_prob
             self.rew_buf[t] = reward
