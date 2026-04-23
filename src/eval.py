@@ -28,7 +28,7 @@ def eval():
     env = gym.wrappers.RecordVideo(
         env,
         video_folder="videos",
-        episode_trigger=lambda ep: True,  # record every episode
+        episode_trigger=lambda ep: True,
         video_length=300,
     )
 
