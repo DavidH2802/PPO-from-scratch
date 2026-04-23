@@ -113,7 +113,7 @@ cd PPO-from-scratch
 pip install -r requirements.txt
 ```
 
-### Clone and Run
+### Run
 
 ```bash
 cd PPO-from-scratch/src
