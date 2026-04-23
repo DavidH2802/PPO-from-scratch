@@ -3,7 +3,7 @@
 A minimal, from-scratch implementation of Proximal Policy Optimization (PPO) in PyTorch, trained on GPU-parallel environments using NVIDIA Isaac Lab. The agent runs thousands of environment instances simultaneously on a single GPU, achieving fast wall-clock training times on robotics tasks.
 
 <p align="center">
-  <img src="readme_assets/franka_reach.gif" alt="Franka Reach Policy" width="480"/>
+  <img src="assets/franka_reach.gif" alt="Franka Reach Policy" width="480"/>
 </p>
 
 ## Results
@@ -13,21 +13,21 @@ Trained on `Isaac-Reach-Franka-v0` with 4096 parallel environments on an RTX 407
 ### Reward Curve
 
 <p align="center">
-  <img src="readme_assets/reward_curve.png" alt="Reward Curve" width="700"/>
+  <img src="assets/reward_curve.png" alt="Reward Curve" width="700"/>
 </p>
 
-The agent starts with negative reward (arm far from target) and converges to positive reward as it learns to reach the target position. A brief policy collapse around iteration 150 is followed by a clean recovery — a common PPO training dynamic.
+The agent starts with negative reward (arm far from target) and converges to positive reward as it learns to reach the target position. A brief policy collapse around iteration 150 is followed by a clean recovery.
 
 ### Policy Loss
 
 <p align="center">
-  <img src="readme_assets/policy_loss.png" alt="Policy Loss" width="700"/>
+  <img src="assets/policy_loss.png" alt="Policy Loss" width="700"/>
 </p>
 
 ### Value Loss
 
 <p align="center">
-  <img src="readme_assets/value_loss.png" alt="Value Loss" width="700"/>
+  <img src="assets/value_loss.png" alt="Value Loss" width="700"/>
 </p>
 
 ## PPO Algorithm
@@ -101,18 +101,20 @@ Isaac Lab requires Python 3.10 or 3.11.
 python3.10 -m venv env_isaaclab
 source env_isaaclab/bin/activate
 
+# Install PyTorch (adjust for your CUDA version)
+pip install torch torchvision --index-url https://download.pytorch.org/whl/cu121
+
 # Install Isaac Lab (includes Isaac Sim, Gymnasium, and all dependencies)
 pip install 'isaaclab[isaacsim,all]==2.0.2' --extra-index-url https://pypi.nvidia.com
 
-git clone https://github.com/DavidH2802/PPO-from-scratch.git
-
-cd PPO-from-scratch
-pip install -r requirements.txt
+# Install remaining dependencies
+pip install tensorboard
 ```
 
 ### Clone and Run
 
 ```bash
+git clone https://github.com/<your-username>/PPO-from-scratch.git
 cd PPO-from-scratch/src
 ```
 
