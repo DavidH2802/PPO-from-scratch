@@ -1,5 +1,4 @@
-import gymnasium as gym
-from isaaclab_tasks.direct.cartpole.cartpole_env import CartpoleEnvCfg
+from isaaclab_tasks.direct.cartpole.cartpole_env import CartpoleEnv, CartpoleEnvCfg
 
 
 class IsaacLabEnv:
@@ -7,10 +6,7 @@ class IsaacLabEnv:
         env_cfg = CartpoleEnvCfg()
         env_cfg.scene.num_envs = cfg.num_envs
 
-        self.env = gym.make(
-            cfg.task,
-            cfg=env_cfg,
-        )
+        self.env = CartpoleEnv(cfg=env_cfg)
 
         self.num_envs = cfg.num_envs
         self.obs_dim = env_cfg.observation_space
