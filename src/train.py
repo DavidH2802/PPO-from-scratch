@@ -1,3 +1,6 @@
+import os
+os.environ["OMNI_LOG_LEVEL"] = "ERROR"
+
 from isaaclab.app import AppLauncher
 
 app_launcher = AppLauncher(headless=True)

@@ -1,3 +1,6 @@
+import os
+os.environ["OMNI_LOG_LEVEL"] = "ERROR"
+
 from isaaclab.app import AppLauncher
 
 app_launcher = AppLauncher(headless=True, enable_cameras=True)
@@ -37,7 +40,7 @@ def eval():
     obs_dim = obs.shape[-1]
     act_dim = env.action_space.shape[-1]
 
-    checkpoint = torch.load("final_policy.pt", map_location=cfg.device)
+    checkpoint = torch.load("final_policy.pt", map_location=cfg.device, weights_only=True)
 
     actor = Actor(obs_dim, act_dim).to(cfg.device)
     actor.load_state_dict(checkpoint["actor"])
