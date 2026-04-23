@@ -3,7 +3,7 @@
 A minimal, from-scratch implementation of Proximal Policy Optimization (PPO) in PyTorch, trained on GPU-parallel environments using NVIDIA Isaac Lab. The agent runs thousands of environment instances simultaneously on a single GPU, achieving fast wall-clock training times on robotics tasks.
 
 <p align="center">
-  <img src="assets/franka_reach.gif" alt="Franka Reach Policy" width="480"/>
+  <img src="readme_assets/franka_reach.gif" alt="Franka Reach Policy" width="480"/>
 </p>
 
 ## Results
@@ -13,7 +13,7 @@ Trained on `Isaac-Reach-Franka-v0` with 4096 parallel environments on an RTX 407
 ### Reward Curve
 
 <p align="center">
-  <img src="assets/reward_curve.png" alt="Reward Curve" width="700"/>
+  <img src="readme_assets/reward_curve.png" alt="Reward Curve" width="700"/>
 </p>
 
 The agent starts with negative reward (arm far from target) and converges to positive reward as it learns to reach the target position. A brief policy collapse around iteration 150 is followed by a clean recovery.
@@ -21,13 +21,13 @@ The agent starts with negative reward (arm far from target) and converges to pos
 ### Policy Loss
 
 <p align="center">
-  <img src="assets/policy_loss.png" alt="Policy Loss" width="700"/>
+  <img src="readme_assets/policy_loss.png" alt="Policy Loss" width="700"/>
 </p>
 
 ### Value Loss
 
 <p align="center">
-  <img src="assets/value_loss.png" alt="Value Loss" width="700"/>
+  <img src="readme_assets/value_loss.png" alt="Value Loss" width="700"/>
 </p>
 
 ## PPO Algorithm
