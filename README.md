@@ -107,7 +107,7 @@ pip install torch torchvision --index-url https://download.pytorch.org/whl/cu121
 # Install Isaac Lab (includes Isaac Sim, Gymnasium, and all dependencies)
 pip install 'isaaclab[isaacsim,all]==2.0.2' --extra-index-url https://pypi.nvidia.com
 
-git clone https://github.com/<your-username>/PPO-from-scratch.git
+git clone https://github.com/DavidH2802/PPO-from-scratch.git
 
 cd PPO-from-scratch
 pip install -r requirements.txt
