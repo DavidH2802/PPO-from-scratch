@@ -10,11 +10,19 @@ class IsaacLabEnv:
         self.env = gym.make(cfg.task, cfg=env_cfg)
 
         self.num_envs = cfg.num_envs
-        self.obs_dim = self.env.observation_space["policy"].shape[0]
-        self.act_dim = self.env.action_space.shape[0]
         self.device = cfg.device
 
+        # get dims from actual reset output
+        obs_dict, _ = self.env.reset()
+        self._initial_obs = obs_dict["policy"]
+        self.obs_dim = self._initial_obs.shape[-1]
+        self.act_dim = self.env.action_space.shape[-1]
+
     def reset(self):
+        if self._initial_obs is not None:
+            obs = self._initial_obs
+            self._initial_obs = None
+            return obs
         obs_dict, _ = self.env.reset()
         return obs_dict["policy"]
 
