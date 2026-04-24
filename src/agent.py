@@ -95,7 +95,7 @@ class PPOAgent:
                 logp_new = self.actor.get_log_prob(mb_obs, mb_act)
                 ratio = (logp_new - mb_logp_old).exp()
                 clipped = ratio.clamp(1.0 - self.cfg.clip_eps, 1.0 + self.cfg.clip_eps)
-                policy_loss = -torch.min(ratio * mb_adv, clipped * mb_adv).mean()
+                policy_objective = -torch.min(ratio * mb_adv, clipped * mb_adv).mean()
 
                 # value loss
                 values = self.critic(mb_obs)
@@ -105,7 +105,7 @@ class PPOAgent:
                 _, _, entropy = self.actor.get_action(mb_obs)
                 entropy_loss = -entropy.mean()
 
-                loss = policy_loss + 0.5 * value_loss + 0.01 * entropy_loss
+                loss = policy_objective + 0.5 * value_loss + 0.01 * entropy_loss
 
                 self.optimizer.zero_grad()
                 loss.backward()
@@ -113,7 +113,7 @@ class PPOAgent:
                 torch.nn.utils.clip_grad_norm_(self.critic.parameters(), 0.5)
                 self.optimizer.step()
 
-                total_policy_loss += policy_loss.item()
+                total_policy_loss += policy_objective.item()
                 total_value_loss += value_loss.item()
 
         num_updates = self.cfg.epochs_per_update * (total // self.cfg.minibatch_size)
