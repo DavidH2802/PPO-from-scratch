@@ -1,5 +1,7 @@
 # PPO from Scratch in PyTorch with Isaac Lab
 
+[![Model on HuggingFace](https://img.shields.io/badge/🤗%20Model-PPO--from--scratch-yellow)](https://huggingface.co/DavidH2802/PPO-from-scratch)
+
 A minimal, from-scratch implementation of Proximal Policy Optimization (PPO) in PyTorch, trained on GPU-parallel environments using NVIDIA Isaac Lab. The agent runs thousands of environment instances simultaneously on a single GPU, achieving fast wall-clock training times on robotics tasks.
 
 <p align="center">
