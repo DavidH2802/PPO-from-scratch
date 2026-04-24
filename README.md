@@ -1,5 +1,7 @@
 # PPO from Scratch in PyTorch with Isaac Lab
 
+[![Model on HuggingFace](https://img.shields.io/badge/🤗%20Model-PPO--from--scratch-yellow)](https://huggingface.co/DavidH2802/PPO-from-scratch)
+
 A minimal, from-scratch implementation of Proximal Policy Optimization (PPO) in PyTorch, trained on GPU-parallel environments using NVIDIA Isaac Lab. The agent runs thousands of environment instances simultaneously on a single GPU, achieving fast wall-clock training times on robotics tasks.
 
 <p align="center">
@@ -36,7 +38,7 @@ PPO is an on-policy, actor-critic reinforcement learning algorithm. The key idea
 
 ### Policy Objective (Clipped Surrogate)
 
-$$L^{CLIP}(\theta) = \mathbb{E}_t \left[ \min \left( r_t(\theta) \hat{A}_t, \; \text{clip}(r_t(\theta), 1-\epsilon, 1+\epsilon) \hat{A}_t \right) \right]$$
+$$L^{CLIP}(\theta) = -\mathbb{E}_t \left[ \min \left( r_t(\theta) \hat{A}_t, \; \text{clip}(r_t(\theta), 1-\epsilon, 1+\epsilon) \hat{A}_t \right) \right]$$
 
 where $r_t(\theta) = \frac{\pi_\theta(a_t | s_t)}{\pi_{\theta_{old}}(a_t | s_t)}$ is the probability ratio between new and old policies, $\hat{A}_t$ is the estimated advantage, and $\epsilon = 0.2$ is the clipping parameter.
 
@@ -113,7 +115,7 @@ cd PPO-from-scratch
 pip install -r requirements.txt
 ```
 
-### Clone and Run
+### Run
 
 ```bash
 cd PPO-from-scratch/src
