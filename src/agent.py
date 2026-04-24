@@ -91,7 +91,7 @@ class PPOAgent:
                 mb_adv = adv_flat[idx]
                 mb_ret = ret_flat[idx]
 
-                # policy loss
+                # policy objective
                 logp_new = self.actor.get_log_prob(mb_obs, mb_act)
                 ratio = (logp_new - mb_logp_old).exp()
                 clipped = ratio.clamp(1.0 - self.cfg.clip_eps, 1.0 + self.cfg.clip_eps)
