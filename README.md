@@ -50,7 +50,7 @@ where $\delta_t = r_t + \gamma V(s_{t+1}) - V(s_t)$ is the TD error, $\gamma = 0
 
 ### Value Loss
 
-$$L^{V}(\phi) = \frac{1}{2} \mathbb{E}_t \left[ (V_\phi(s_t) - R_t)^2 \right]$$
+$$L^{V}(\phi) = \mathbb{E}_t \left[ (V_\phi(s_t) - R_t)^2 \right]$$
 
 ### Entropy Bonus
 
