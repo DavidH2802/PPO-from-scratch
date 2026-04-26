@@ -99,7 +99,7 @@ class PPOAgent:
 
                 # value loss
                 values = self.critic(mb_obs)
-                value_loss = 0.5 * (values - mb_ret).pow(2).mean()
+                value_loss = (values - mb_ret).pow(2).mean()
 
                 # entropy bonus
                 _, _, entropy = self.actor.get_action(mb_obs)
