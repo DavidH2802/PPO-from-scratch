@@ -196,8 +196,6 @@ Trained and evaluated on:
 - **CPU:** Intel Xeon E5-2673 v4
 - **Cloud:** vast.ai
 
-Minimum requirements: any NVIDIA GPU with 12+ GB VRAM, Linux, CUDA 12+.
-
 ## References
 
 - [Proximal Policy Optimization Algorithms](https://arxiv.org/abs/1707.06347) — Schulman et al., 2017
